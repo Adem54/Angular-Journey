@@ -1,0 +1,25 @@
+<!--
+  Angular uygulamalarında componentler, HTML, CSS ve TypeScript dosyalarından oluşur. 
+  Bu dosyalar bir araya gelerek bir bileşeni oluşturur. 
+  Bu bileşenler, uygulamanın kullanıcı arayüzünü oluşturur. -->
+<style>
+  
+</style>
+
+  <div class="content">
+   <h2>Hello my classic angular app!</h2>
+   <h4>
+      {{ title }}
+  </h4>
+      <br>
+      <p>{{ description }}</p> 
+      <br>
+      <p>{{ author }}</p> 
+      <p>{{ name }}</p> 
+
+    <br>
+    <br>
+      <input type="text" [(ngModel)]="name" placeholder="Enter name">
+      <!--  Angular da input-form elemanlarini kullanabilmek icin app.modules icerisinde, Form modulunun eklemis olmamiz gerekiyor -->
+  </div>
+<router-outlet />
