@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [//Compponetnlerin tanimlandigi yer
@@ -11,7 +11,8 @@ import { AppComponent } from './app.component';
   imports: //Modulelerin tanimlandigi yer
   [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]//app.module icinde calistirilabilir ilk componenti de burda tanimliyoruz...Ilk calistirilabilecek component, AppComponent olarak tanimlandi..

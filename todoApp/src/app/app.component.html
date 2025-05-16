@@ -1,27 +1,60 @@
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * Delete the template below * * * * * * * * * -->
-<!-- * * * * * * * to get started with your project! * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
 
+ <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-5">
+            <h3 class="b-primary text white p3">
+              [{{model.user}}]  To Do List
+            </h3>
+            <div class="input-group">
+              <input type="text" class="form-control">
+              <div class="input-group-appen">
+                <button class="btn btn-primary">Add</button>
+              </div>
+            </div>
+            <table class="table table table-striped table-bordered">
+                <thead>
+                  <tr>
+                    <th>Description</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- her for dongusu dondugunde...yeni bir tr olusturuyor!! -->
+                  <tr *ngFor="let todo of getItemNotCompleted(); let i = index"><!-- index i de berabernde geliyor...   -->
+                    <td>{{i+1}}</td>
+                    <td>{{todo.description}}</td>
+                    <td>{{todo.completed ? 'Completed' : 'Not completed'}}</td>
+                    <td  [ngSwitch]="todo.completed" >
+                      <span *ngSwitchCase="true"> YES</span>
+                      <span *ngSwitchCase="false"> NO</span>
+                    </td>
+                    <td>
+                      <input type="checkbox" [(ngModel)]="todo.completed"  />
+                    </td>
+                  </tr>
+                </tbody>
+                <hr>
+               
+               <h3> [{{getUserName()}}]  To Do List </h3> <br>
 
-<main class="main">
-  <div class="content">
-  <h2>{{title}}</h2>
-  </div>
-</main>
-
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content above * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * End of Placeholder  * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-
-
+                <tbody>
+                  <!-- her for dongusu dondugunde...yeni bir tr olusturuyor!! -->
+                  <tr *ngFor="let todo of getItems(); let j = index;">
+                    <td>{{j+1}}</td>
+                    <td>{{todo.description}}</td>
+                    <td>{{todo.completed ? 'Done' : 'Not Done'}}</td>
+                    <td  [ngSwitch]="todo.completed" >
+                      <span *ngSwitchCase="true"> JA</span>
+                      <span *ngSwitchCase="false"> NEI</span>
+                    </td>
+                     <td>
+                      <input type="checkbox" [(ngModel)]="todo.completed"  ng />
+                    </td>
+                  </tr>
+                </tbody>
+                </table>
+        </div>
+      </div>
+   </div>
 <router-outlet />
