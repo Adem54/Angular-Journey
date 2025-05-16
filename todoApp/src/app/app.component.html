@@ -7,11 +7,25 @@
               [{{model.user}}]  To Do List
             </h3>
             <div class="input-group">
-              <input type="text" class="form-control">
+              <!-- input attributunde #todoText kullanarak, bir this ya da input un this i ya da input un referansini temsil eden dom uzerinden onu direk referansina erisen todoText isminde bir variable haline getirerek onu todoText uzerinden, button daki click methodunun parametresine verebilmemizi, ve attribute de input icini sifirlayabilmemizi sagliyor -->
+              <input type="text" #todoText class="form-control">
               <div class="input-group-appen">
-                <button class="btn btn-primary">Add</button>
+                <!--   todoText.value=''; ile tiklandiktan sonra input ici sifirlansin demis oluyoruz-->
+                   <!--   -->
+                <button class="btn btn-primary" (click)="addItem(todoText.value); todoText.value='';">Add</button>
+                <!--addItem mehtodunu nerde kullanacagiz tabi ki bu html imize karsilik gelen js-ts dosyamizda diger variable ve methodlari kullandigmz yerde... -->
+                <!--ng-click gelince tab a basarsak button un onclick methodunu getiriyor zaten -->
               </div>
             </div>
+
+            <br>
+                   
+                    <div class="custom-control custom-checkbox my-3">
+                      <input type="checkbox" [(ngModel)]="isDisplay"  class="custom-control-input" name=""  id="displayAll"  />
+                      <label for="displayAll">Display All</label>  
+                    </div>
+
+
             <table class="table table table-striped table-bordered">
                 <thead>
                   <tr>
