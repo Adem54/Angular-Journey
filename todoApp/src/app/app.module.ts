@@ -3,10 +3,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
+import { MoviesComponent } from './movies/movies.component';
 
 @NgModule({
   declarations: [//Compponetnlerin tanimlandigi yer
-    AppComponent
+    AppComponent,
+    MoviesComponent
   ],
   imports: //Modulelerin tanimlandigi yer
   [
