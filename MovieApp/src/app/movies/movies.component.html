@@ -1,33 +1,91 @@
 
 <style>
     /* Add your custom styles here */
-   /* .movies {
-        margin: 20px;
-        padding: 20px;
-        background-color: #f8f9fa;
-        border-radius: 5px;
-    }
-    .list-group-item {
-        background-color: #e9ecef;
-        border: 1px solid #ced4da;
-        margin-bottom: 10px;
-        padding: 10px;
-        border-radius: 5px;
-    } */
+     h2 {
+        color: aqua;
+        font-size: 24px;
+        margin-bottom: 20px;
+     }
+
+     .close{
+        margin-left:10px;
+     }
 </style>
+<h2>{{title}}</h2>
+<h2>{{getTitle()}}</h2>
 
-<div class="movies">
-        <ul class="list-group ">
-        <li class="list-group-item">An item</li>
-        <li class="list-group-item">A second item</li>
-        <li class="list-group-item">A third item</li>
-        <li class="list-group-item">A fourth item</li>
-        <li class="list-group-item">And a fifth one</li>
-        </ul>
-</div>
+<!-- Burda dizi item adedi kadar  ul-li listesin olusacaktir...-->
+   <div>
+      
+        <!-- click eventine li nin referansini parametre olarak gondererek , tiklanan li elementine erismek!!! 
+      <ul>
+            <li  #movie_li  *ngFor="let item of movieList; let i = index" (click)="onSelectMovie(movie_li)">
+                <div>Index: {{ i }}</div>
+                <div>Movie ID: {{ item.id }}</div>
+                <div>Movie Name: {{ item.name }}</div>
+                <button>Delete Movie</button>
+            </li>
+      </ul>
+   </div>  -->
 
-<div class="container">
+   <!-- Selected Movie Detail i bu sekilde yazdirabiliriz!!!! Ayrica ilk sayfa yuklenidginde henuz bir movie secilmedigi icin data gelmeycek dogal olarak o zaman bizde selctedMovie var ise gosterilsin yok sa gosterilmesin dememiz gerekiyor..**ngIf ile selectedMovie var ise gosterilsin logicini implement etmis oluyuoruz -->
+   <!-- <div class="card"  *ngIf="selectedMovie" style="max-width: 18rem;">
+        <div class="card-header">
+            <h4>Selected Movie</h4>
+        </div>
+        <div class="card-body">
+           <span>
+                <h4>Movie ID: {{selectedMovie.id}}</h4>
+                <h4>Movie Name: {{selectedMovie.name}}</h4>
+           </span>
+
+           <div class="input-group">-->
+            <!-- [(ngModel)]="selectedMovie.name" kullanirsak degistridgimz anda anindan two-ways bindingden dolayi heryerde degisiklik gerceklesecektir ama  value={{selectedMovie.name}}  de kullanirsak(one-way data binding) o zamanda update butonuna tikladigmzda selectedMovie name i hem selectedMovie de hem de movies disizi icerisinde update edilecektir...--><!--
+            <input type="text" #movie name="" id="" class="form-control" [(ngModel)]="selectedMovie.name"  placeholder="Movie Name" >
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" (click)="OnUpdate(movie.value)">Update</button>
+            </div>
+           </div>
+        </div>
+   </div> -->
+   <movie-detail [movie]="selectedMovie"></movie-detail>
+
+   <!-- Tiklanan li elemanti icerisindeki movie datasini temsil eden, movielist in item ini click-eentine parametre olarak gondererek click eventi iceriisinden tiklanan dataya erismek -->
+    <div class="card" style="max-width: 18rem;">
+        <div class="card-header">
+             {{title}} 
+        </div>
+        <ul class="list-group list-group-flush" >
+            <li class="list-group-item "  *ngFor="let item of movieList; let i = index" (click)="onSelect(item)"
+                [ngClass]="{'active': selectedMovie === item}" 
+                [class.active] = "selectedMovie === item"
+                [style.background-color]="selectedMovie === item ? 'cyan' : 'white'"
+                [ngStyle]="{'background-color': selectedMovie === item ? 'lightblue' : 'white'}"
+                [style.color]="selectedMovie === item ? 'white' : 'black'"
+                [style.font-size.px]="selectedMovie === item ? 20 : 16"
+                [style.font-style]="selectedMovie === item ? 'italic' : 'normal'"
+                [style.font-weight]="selectedMovie === item ? 'bold' : 'normal'"
+                [style.text-decoration]="selectedMovie === item ? 'underline' : 'none'"
+                [style.cursor]="selectedMovie === item ? 'pointer' : 'default'"
+                [style.text-align]="selectedMovie === item ? 'center' : 'left'"
+                [style.padding.px]="selectedMovie === item ? 10 : 5"
+                >
+                <!-- <div>Index: {{ i }}</div> -->
+                <!-- <div>Movie ID: {{ item.id }}</div> -->
+                <!-- <div>Movie Name: {{ item.name }}</div> -->
             
-        <movie></movie>
-        <movie></movie>
+                <span class="badge badge-primary">
+                    {{ item.id }}
+                </span>
+                 {{ item.name }}
+                 <span class="close ml-10"   >X</span>
+            </li>
+        </ul>
+    </div>
+<movie></movie>
+<movie></movie>
+
+            
+<div>
+    <span>Movies comp!</span>
 </div>

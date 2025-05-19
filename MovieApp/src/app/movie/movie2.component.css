@@ -1,0 +1,10 @@
+@import './movie.component.css';
+
+p {
+    color:teal;
+    font-size: 20px;
+}
+h4 {
+    color:orange;
+    font-size: 20px;
+}

@@ -1,0 +1,25 @@
+
+
+
+<pre>{{ movie | json }}</pre>
+
+   <!-- Selected Movie Detail i bu sekilde yazdirabiliriz!!!! Ayrica ilk sayfa yuklenidginde henuz bir movie secilmedigi icin data gelmeycek dogal olarak o zaman bizde selctedMovie var ise gosterilsin yok sa gosterilmesin dememiz gerekiyor..**ngIf ile movie var ise gosterilsin logicini implement etmis oluyuoruz -->
+   <div class="card"  *ngIf="movie" style="max-width: 18rem;">
+        <div class="card-header">
+            <h4>Selected Movie</h4>
+        </div>
+        <div class="card-body">
+           <span>
+                <h4>Movie ID: {{movie.id}}</h4>
+                <h4>Movie Name: {{movie.name}}</h4>
+           </span>
+
+           <div class="input-group">
+            <!-- [(ngModel)]="movie.name" kullanirsak degistridgimz anda anindan two-ways bindingden dolayi heryerde degisiklik gerceklesecektir ama  value={{movie.name}}  de kullanirsak(one-way data binding) o zamanda update butonuna tikladigmzda movie name i hem movie de hem de movies disizi icerisinde update edilecektir...-->
+            <input type="text" name="" id="" class="form-control" [(ngModel)]="movie.name"  placeholder="Movie Name" >
+            <div class="input-group-append">
+                <!-- <button class="btn btn-outline-secondary" type="button" (click)="OnUpdate(movie.value)">Update</button> -->
+            </div>
+           </div>
+        </div>
+   </div>
