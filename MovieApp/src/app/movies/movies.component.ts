@@ -33,15 +33,11 @@ export class MoviesComponent {
             });
     }
 
-
     getMovieList() {
         console.log("getMovieList...");
 
         return this.movieService.getMovies();
-
     }
-
-
 
     getTitle() {
         return this.title;
@@ -62,7 +58,8 @@ export class MoviesComponent {
     }
 
     //Burda biz, click-eventi parametresinie html iceisinde li attributunde #movie_li diye tanimladigmz keywordu onSelectMovie click eventine parametre olarak gonderdik ki, bu movie_li keywordu #movile_li diye hangi html-tag in in atributunden tanimlanirsa o tagin referansini temsil eder..AYNI THIS GIBI DUSUNELIM...HARIKA BESTPRACTISE!!
-    onSelectMovie(liItem: HTMLElement): void {
+    onSelectMovie(liItem: HTMLElement): void 
+    {
         console.log("liItem: ", liItem);
         console.log("Full <li> text content:", liItem.textContent);
         console.log("#########################");
@@ -75,3 +72,5 @@ export class MoviesComponent {
 //Bu componenti olusturduk, peki bu componentten modulun haberi olmasi gerekiyor...app.module.ts dosyasina gidip bu componenti declaration kisminda eklememiz gerekiyor ki componentimizin taninmasi icin....
 //Ayrica bu componenti kullanabilmek icin, app.component.html dosyasinda bu componenti kullanmamiz gerekiyor
 //app.component.html dosyasinda <movies></movies> tagini ekleyerek bu componenti kullanabiliriz
+
+//Routing- movie listesini gormek istedigmizde url dee  localhost:3001/movies  , ve movie detayi gelirken de url de localhost:3001/detail/2 veya localhost:3001/movie/2 seklinde gelsin ..Routin bilgilerini componentlerle iliskilendiriyor olmamiz gerekiyor

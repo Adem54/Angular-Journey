@@ -1,0 +1,26 @@
+
+<pre>{{ movies | json }}</pre>
+<div class="card my-2" *ngFor="let movie of movies; let i = index;">
+    <div class="row">
+        <div class="col-3">
+            <img src="assets/img/{{movie.imageUrl}}" class="card-img" alt="">
+        </div>
+        <div class="col-9">
+            <div class="card-body">
+                <h5 class="card-title">
+                   <a href="">{{movie.name}}</a>
+                </h5>
+                <p class="card-text">
+                    {{movie.description}}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Eger ki bu sayfada gosterilen movie sayisi ornein 3 ten fazla is oo zaman buttonu goster diyelim...-->
+<button *ngIf="movies.length>3" class="text-center my-2">More mmovie</button>
+<button *ngIf="movieLength > 3;"  class="btn btn-primary m-4" >More moviee</button>
+
+<div *ngIf="movieLength > 3">
+    <a routerLink="/movies" class="btn btn-primary">More movies</a>
+</div>

@@ -1,5 +1,11 @@
-<div class="card">
+<div class="card" *ngIf="loggingService.messages.length"><!--EGer message listesi var ise o zaman goster diyoruz burda-->
+    <div class="card-header">
+        Messages
+    </div>
     <div class="card-body">
-        Logging works!
+        <button (click)="loggingService.clear();" class="btn btn-primary btn-sm">Clean</button>
+            <p *ngFor="let message of loggingService.messages; let i=index;">
+                {{message}}
+            </p>
     </div>
 </div>

@@ -3,6 +3,7 @@ import { Movies } from './movie.datasource';
 import { Movie } from './movie';
 import { Observable, of } from 'rxjs';
 import { LoggingService } from './logging.service';
+import { compileNgModule } from '@angular/compiler';
 //@Injectable decorator hazirlyoruz ve providedIn ozelligi root diyoruz..Injettiable olmasi uygulamanin root modulu yani app module uzerinden movie service istedgimz bir noktatdan ulsabbilmemizi sagliyor 
 //Eger uygulamada baska modullerde varse o modullerede ulsabilecegin burdan belirterek o modullerden de dataya erisim saglayabiliriz
 //Uygumala icindeki app module icindeki herhangi bir yerden bu servise erisebliyoruz..app module cunku tum compnentleri kapsiyor...
@@ -13,11 +14,13 @@ import { LoggingService } from './logging.service';
 })
 export class MovieService {
 
+  //Biz bu logginServiceyi sadece MovieSErvice componenti icerisinde kullandigmz icin, private loggingService:LoggingService yaptik yani private olarak isaretledik  ama eger ki bir componente bagli olan bir html sayfasinda da kullanacak olsa idik o zaman public yapmamiz gerekirdi!!!
   constructor(private loggingService:LoggingService ) { }
 
   //Observable ile wraplayarak datayi almamiz gerekiyor, of ile de return edilen datayi Observable haline getirerek donduuruyoruz ve bu sekilde artik return edilen data asenkron bir sekilde dondurulmus oluyor
   getMovies():Observable<Movie[]> 
   {
+    console.log("movie-servie!!!!!!")
     this.loggingService.add("MovieService: listing movies");
     return of(Movies);
   }

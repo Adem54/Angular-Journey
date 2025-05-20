@@ -1,0 +1,21 @@
+<div class="navbar navbar-expand-sm bg-primary navbar-dark">
+    <div class="container">
+        <a routerLink="/" class="navbar-brand">Movie App</a><!--varsayilan router ayari gelir -->
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a routerLink="/dashboard" class="nav-link">Dashboard</a>
+            </li>
+            <li class="nav-item">
+                <a routerLink="/movies" class="nav-link">Movies</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<!--TAbi ki bu navbar i app.component.html e eklememiz gerekiyor...app.component.html projemizin route componenti..navbar.ts de selector da ne girdi isek 
+@Component({
+  selector: 'navbar',
+  standalone: false,
+  templateUrl: './navbar.component.html',
+  styleUrl: './navbar.component.css'
+  <navbar></navbar> i gidip app.compnent.html iciinde kullanabiliriz
+-->
