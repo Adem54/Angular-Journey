@@ -48,7 +48,7 @@
            </div>
         </div>
    </div> -->
-   <movie-detail [movie]="selectedMovie"></movie-detail>
+   <!-- <movie-detail [movie]="selectedMovie"></movie-detail>  Buraya tiklayarak gidecedgiz artik router uzerinden ondan dolayi kaldiiryoruz -->
 
    <!-- Tiklanan li elemanti icerisindeki movie datasini temsil eden, movielist in item ini click-eentine parametre olarak gondererek click eventi iceriisinden tiklanan dataya erismek -->
     <div class="card" style="max-width: 18rem;">
@@ -56,21 +56,15 @@
              {{title}} 
         </div>
         <ul class="list-group list-group-flush" >
-            <li class="list-group-item "  *ngFor="let item of movieList; let i = index" (click)="onSelect(item)"
+            <li class="list-group-item "  *ngFor="let item of movieList; let i = index;"  
+              routerLink="/detail/{{item.id}}"
+                >
+                <!--
                 [ngClass]="{'active': selectedMovie === item}" 
                 [class.active] = "selectedMovie === item"
                 [style.background-color]="selectedMovie === item ? 'cyan' : 'white'"
                 [ngStyle]="{'background-color': selectedMovie === item ? 'lightblue' : 'white'}"
-                [style.color]="selectedMovie === item ? 'white' : 'black'"
-                [style.font-size.px]="selectedMovie === item ? 20 : 16"
-                [style.font-style]="selectedMovie === item ? 'italic' : 'normal'"
-                [style.font-weight]="selectedMovie === item ? 'bold' : 'normal'"
-                [style.text-decoration]="selectedMovie === item ? 'underline' : 'none'"
-                [style.cursor]="selectedMovie === item ? 'pointer' : 'default'"
-                [style.text-align]="selectedMovie === item ? 'center' : 'left'"
-                [style.padding.px]="selectedMovie === item ? 10 : 5"
-                >
-                <!-- <div>Index: {{ i }}</div> -->
+                <div>Index: {{ i }}</div> -->
                 <!-- <div>Movie ID: {{ item.id }}</div> -->
                 <!-- <div>Movie Name: {{ item.name }}</div> -->
             

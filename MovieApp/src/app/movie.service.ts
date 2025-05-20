@@ -25,6 +25,21 @@ export class MovieService {
     return of(Movies);
   }
 
+  /*
+  Aldigim typescript hatasi ve solution:
+  Type 'Observable<Movie | undefined>' is not assignable to type 'Observable<Movie>'.
+Type 'undefined' is not assignable to type 'Movie'.
+  getMovie(id:any):Observable<Movie | undefined>
+
+  */
+  getMovie(id:any):Observable<Movie | undefined>
+  {
+    this.loggingService.add(`MovieService: get movie detail by id=${id}` );
+    return of(Movies.find(movie=>movie.id === Number(id)));
+  }
+
+
+
   //this.loggingService sadece parametreye loggingService geliyor ve biz this.loggingService = loggingService kendmiz manuel olarak yapmiyoruz ama this.loggingService diye kullanabliyoruz bu nasil oluyor?
   //Sen constructor(private loggingService: LoggingService) yazdığında,TypeScript ve Angular şunu otomatik olarak yapar: Field'ı tanımlar (this.loggingService) Constructor'da gelen parametreyle eşitler (this.loggingService = loggingService)  
   //Parameter Property Declaration (C#’ta yoktur) Angular (ve modern TypeScript) bunu destekler. Böylece: Hem field tanımlamak Hem de constructor’da atamak zorunda kalmazsın.

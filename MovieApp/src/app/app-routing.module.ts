@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { MoviesComponent } from './movies/movies.component';
 import { AppHomeComponent } from './app.home/app.home.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { MovieDetailComponent } from './movie-detail/movie-detail.component';
 
 //route linklerimizi olusturalim...
 const routes: Routes = [
@@ -14,10 +15,10 @@ const routes: Routes = [
   {path:'', redirectTo:'/dashboard', pathMatch:'full'},
   //pathMatch: 'full' → match the entire URL path
   //pathMatch: 'prefix' (default) → match just the start of the URL path
-  
+
   //{path:'', component:AppHomeComponent},
   {path:'dashboard', component:DashboardComponent},
-
+  {path:'detail/:id', component:MovieDetailComponent},//:id diyerek id bilgisin bekledgin soylemis oluyoruz..degisken tanimlamasi yapiyoruz..yani
 ];
 //http://localhost:3001/movies MoviesComponent icerigini getirir
 //http://localhost:3001 AppHomeComponent iceriign getirir
