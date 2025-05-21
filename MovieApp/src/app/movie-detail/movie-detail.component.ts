@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Movie } from '../movie';
 import { MovieService } from '../movie.service';
 import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'movie-detail',
@@ -17,13 +18,29 @@ export class MovieDetailComponent {
 //Biz movieService datayi sadece movie-detail.component.ts de kullanacagiz movie-detail.component.hmtl kullanmayacagiz...eger .html de de kullanacak olsa idik o zaman private yerine public olarak vermemiz gerekirdi constructor da... 
   constructor(
     private movieService:MovieService,
-    private route:ActivatedRoute//detail id bilgisine ulasabilmek icin bunu aliyoruz..id bilgisin burdan alacagiz
+    private route:ActivatedRoute,//detail id bilgisine ulasabilmek icin bunu aliyoruz..id bilgisin burdan alacagiz
+    private location:Location
   )
   {}
 
-    @Input() movie!:Movie;
+    // @Input() movie!:Movie;
+    movie!: Movie;
   // @Input() selectedMovie: Movie; // @Input decoratoru ile parent componentten movie bilgisini aliyoruz
-  //selectedMovie disardan gelecek bir deger ondan dolayi da @input decoretoru eklemiz gerekiyor selectedMovie yi parent compnnetten alabilmek icin
+  //selectedMovie disardan gelecek bir deger ondan dolayi da @input decoretoru eklemiz gerekiyor selectedMovie yi parent compnnetten alabilmek icin...movies.component.html de su sekilde gonderilir : <movie-detail [movie]="selectedMovie"></movie-detail>
+
+  OnClickUpdate():void
+  {
+    //this.movie yi veririz parametreye cunku this.movie burda da hemen guncelleniyor...bunun sebebi ngMOdul ile yapilan cift tarafli bind islemidir
+    this.movieService.update(this.movie)
+        .subscribe(()=>{
+          //console.log("updated");
+          //guncelleme isleminden sonra kullanicilari tekrar listeye redirect yapalim..
+          //location :Location i constructor da inject ederiz redirect islemini jscripttteki location uzerinden yapabilmek icin
+          //locatin.back() sayfanin geldigi bir onceki geldigi sayfay donmesini sagaliyor
+          this.location.back();
+          
+        })
+  }
 
   ngOnInit(): void 
   {
@@ -69,8 +86,9 @@ export class MovieDetailComponent {
 
                       //But getMovie(id) returns:Observable<Movie | undefined>
   }
-  
-  ngOnChanges() {
+
+  ngOnChanges() 
+  {
     console.log("movie input received:", this.movie);
     //movie input received: {id: 3, name: 'Movie 3'}
   }
