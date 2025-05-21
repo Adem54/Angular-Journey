@@ -27,14 +27,16 @@ export class DashboardComponent {
     //this.movieService.getMovies().subscribe(movies=>this.movies = movies.slice(0,4)); //Eger kodu 1 satirdna fazla yazarsak suslu parantez icine yazmamiz gerekir
     this.movieService.getMovies().subscribe(movies=>
     {
-      this.movies = movies.slice(0,4);
+      this.movies = movies.slice(0,6);
       this.movieLength = movies.length;
     }
     );
-  }
+  } 
+
+ 
   //Biz burda yaparsk, eger this.movies biraz gec datayi alacagi icin, ilk basta, default deger olan 0 gelecktir movies i lengthine...ve movies icin dolduktan sonra gercek degerini alir...onun iciin en dogrusu bu islem subscribe icinde getMovies method u icinde yapilmalidir
   isMovieMoreThan3():boolean
   {
-    return this.movies.length > 3;
+    return this.movies.length > 5;
   }
 }

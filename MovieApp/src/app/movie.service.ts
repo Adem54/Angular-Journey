@@ -4,6 +4,7 @@ import { Movie } from './movie';
 import { Observable, of } from 'rxjs';
 import { LoggingService } from './logging.service';
 import { compileNgModule } from '@angular/compiler';
+import { HttpClient } from '@angular/common/http';
 //@Injectable decorator hazirlyoruz ve providedIn ozelligi root diyoruz..Injettiable olmasi uygulamanin root modulu yani app module uzerinden movie service istedgimz bir noktatdan ulsabbilmemizi sagliyor 
 //Eger uygulamada baska modullerde varse o modullerede ulsabilecegin burdan belirterek o modullerden de dataya erisim saglayabiliriz
 //Uygumala icindeki app module icindeki herhangi bir yerden bu servise erisebliyoruz..app module cunku tum compnentleri kapsiyor...
@@ -13,16 +14,24 @@ import { compileNgModule } from '@angular/compiler';
   providedIn: 'root'
 })
 export class MovieService {
-
+  private apiMoviesURL = 'api/movies';
   //Biz bu logginServiceyi sadece MovieSErvice componenti icerisinde kullandigmz icin, private loggingService:LoggingService yaptik yani private olarak isaretledik  ama eger ki bir componente bagli olan bir html sayfasinda da kullanacak olsa idik o zaman public yapmamiz gerekirdi!!!
-  constructor(private loggingService:LoggingService ) { }
+  constructor(
+    private loggingService:LoggingService,
+    private http:HttpClient
+   
+  ) { }
 
   //Observable ile wraplayarak datayi almamiz gerekiyor, of ile de return edilen datayi Observable haline getirerek donduuruyoruz ve bu sekilde artik return edilen data asenkron bir sekilde dondurulmus oluyor
   getMovies():Observable<Movie[]> 
   {
-    console.log("movie-servie!!!!!!")
     this.loggingService.add("MovieService: listing movies");
-    return of(Movies);
+    return this.http.get<Movie[]>(this.apiMoviesURL);
+  }
+
+  getUsers():Observable<any>
+  {
+      return this.http.get<any>('https://jsonplaceholder.typicode.com/users');
   }
 
   /*
@@ -35,7 +44,8 @@ Type 'undefined' is not assignable to type 'Movie'.
   getMovie(id:any):Observable<Movie | undefined>
   {
     this.loggingService.add(`MovieService: get movie detail by id=${id}` );
-    return of(Movies.find(movie=>movie.id === Number(id)));
+  //  return of(Movies.find(movie=>movie.id === Number(id)));
+      return this.http.get<Movie>(this.apiMoviesURL+ '/'+ id);
   }
 
 
