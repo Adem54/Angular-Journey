@@ -50,8 +50,30 @@ export class MovieService {
       headers:new HttpHeaders({'Content-Type':'application/json'})
     }
     //movi objesini gonderiyourz
-     return this.http.put(this.apiMoviesURL, movie, httpOptions);
+     return this.http.put<Movie>(this.apiMoviesURL, movie, httpOptions);
   }
+
+  insert(movie:Movie):Observable<Movie>
+  {
+      const httpOptions={
+          headers:new HttpHeaders({'Content-Type':'application/json'})
+      }
+      //Burda onemli..gonderilen data nin type ini girmemiz gerekiyor
+      return this.http.post<Movie>(this.apiMoviesURL, movie, httpOptions)
+  }
+
+  delete(movie:Movie):Observable<Movie>
+  {
+    return this.http.delete<Movie>(this.apiMoviesURL + "/"+ movie.id);
+  }
+
+  // delete(movie:Movie):Observable<Movie> 
+  // {
+  //    const httpOptions={
+  //         headers:new HttpHeaders({'Content-Type':'application/json'})
+  //     }
+  //    return this.http.delete<Movie>(this.apiMoviesURL, movie);
+  // }
 
   /*
   Aldigim typescript hatasi ve solution:

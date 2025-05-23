@@ -13,16 +13,16 @@ export class AppComponent {
   users:any;
   constructor(private movieService:MovieService){}
 
-  getUsers():void
-  {
-    this.movieService.getUsers().subscribe(users=>{
-      console.log("users: ", users);
-      this.users=users;
-    });
-  }
+  // getUsers():void
+  // {
+  //   this.movieService.getUsers().subscribe(users=>{
+  //     console.log("users: ", users);
+  //     this.users=users;
+  //   });
+  // }
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
-    this.getUsers();
+    //this.getUsers();
   }
 }

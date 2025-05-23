@@ -32,15 +32,16 @@ export class MovieDetailComponent {
   {
     //this.movie yi veririz parametreye cunku this.movie burda da hemen guncelleniyor...bunun sebebi ngMOdul ile yapilan cift tarafli bind islemidir
     this.movieService.update(this.movie)
-        .subscribe(()=>{
-          //console.log("updated");
-          //guncelleme isleminden sonra kullanicilari tekrar listeye redirect yapalim..
-          //location :Location i constructor da inject ederiz redirect islemini jscripttteki location uzerinden yapabilmek icin
-          //locatin.back() sayfanin geldigi bir onceki geldigi sayfay donmesini sagaliyor
-          this.location.back();
-          
-        })
+    .subscribe(()=>{
+      //console.log("updated");
+      //guncelleme isleminden sonra kullanicilari tekrar listeye redirect yapalim..
+      //location :Location i constructor da inject ederiz redirect islemini jscripttteki location uzerinden yapabilmek icin
+      //locatin.back() sayfanin geldigi bir onceki geldigi sayfay donmesini sagaliyor
+      this.location.back();
+      
+    })
   }
+
 
   ngOnInit(): void 
   {

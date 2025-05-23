@@ -56,7 +56,7 @@
              {{title}} 
         </div>
         <ul class="list-group list-group-flush" >
-            <li class="list-group-item "  *ngFor="let item of movieList; let i = index;"  
+            <li class="list-group-item justify-content-center"  *ngFor="let item of movieList; let i = index;"  
               routerLink="/detail/{{item.id}}"
                 >
                 <!--
@@ -72,14 +72,38 @@
                     {{ item.id }}
                 </span>
                  {{ item.name }}
-                 <span class="close ml-10"   >X</span>
+
+                 <span class="close" (click)="OnClickDelete(item); $event.stopPropagation()">X</span>
+
             </li>
         </ul>
     </div>
-<movie></movie>
-<movie></movie>
+    <!-- Buraya yeni movie eklemk icin input taglari ekleyelim -->
+
+    <div class="card my-2">
+        <div class="card-header my-2">
+            Add Movie
+        </div>
+        <div class="card-body">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" #movieName  name="" id="name"  class="form-control">
+           </div> 
+
+            <div class="form-group">
+                <label for="imageUrl">ImgeUrl</label>
+                <input type="text" #movieImg  name="imageUrl" id="imageUrl" movieImg.value=""  class="form-control">
+           </div> 
+
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea type="text" #movieDesc name="description" id="description" movieDesc.value=""  class="form-control">
+                 </textarea>   
+            </div> 
+           <button class="btn btn-primary btn-sm" (click)="OnClickInsert(movieName.value,movieImg.value, movieDesc.value); movieName.value=''; movieImg.value=''; movieDesc.value=''; ">Insert</button>
+        </div>
+    </div>
+   
+
 
             
-<div>
-    <span>Movies comp!</span>
-</div>

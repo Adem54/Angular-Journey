@@ -33,22 +33,6 @@ export class MoviesComponent {
             });
     }
 
-    getMovieList() {
-        console.log("getMovieList...");
-
-        return this.movieService.getMovies();
-    }
-
-    getTitle() {
-        return this.title;
-    }
-    //Dikkat edelim biz parametredeki movie bilgisni html icerisinde movie listesini listeledgimiz li icerisinde gonderdigmz icin burda goruyoruz ve hangi li ye tiklandigini gorebiliyoruz
-    //vE TIKLANAN DATA YI .ts kisminda tanimladigmz bir selectedMovie degiskenine atayarak, kullanicinin tiklamis oldugu movie bilgisini ts icinde bir degiskene aktarmis oluyoruz...istedgimz gibi kullanabillelim diye!!!
-    onSelect(movie: Movie): void {
-        console.log(movie);
-        this.selectedMovie = movie;
-    }
-
     OnUpdate(movieName: string): void {
         console.log("Movie Name: ", movieName);
         //Burda movieName parametresini aliyoruz ve bu parametreyi kullanarak, selectedMovie nesnesinin name propertysine atiyoruz
@@ -56,6 +40,31 @@ export class MoviesComponent {
         console.log("Selected Movie: ", this.selectedMovie);
         this.movieList = this.movieList.map((movie: Movie) => movie.id === this.selectedMovie.id ? { id: movie.id, name: movieName } : movie);
     }
+
+    //Burdan aldgimz datayi movie.service.ts ye gondereedgiz...
+    OnClickInsert(name:string, img:string, desc:string):void 
+    {
+        console.log(`name: ${name} - img: ${img} - desc: ${desc}`);
+        let movie:Movie = { id:this.movieList.length+1, name, imageUrl:img, description:desc }
+        this.movieService.insert(movie)
+            .subscribe((movie)=>{//movie return ediyordu hatirlayalim...Gelen movie objesini component uzerindeki liste uzerine direk olarak ekleyelim...
+                console.log("new movie added")
+                this.movieList.push(movie);
+            })
+    }
+
+    OnClickDelete(movie:Movie):void 
+    {
+        console.log("movie!!!!: ", movie);
+        //remove the movie
+        //Bu islem arayuzden silmek lokalde tuttugumz data uerinden silmektir ama service uzerinden de uzak apiden de silmemiz gerekir..movie.service.ts de
+        this.movieList = this.movieList.filter(m=>m.id !== movie.id);
+        this.movieService.delete(movie)
+                .subscribe(movie=>{
+                    console.log("Movie is deleted id: ",movie.id )
+                })
+    }
+    
 
     //Burda biz, click-eventi parametresinie html iceisinde li attributunde #movie_li diye tanimladigmz keywordu onSelectMovie click eventine parametre olarak gonderdik ki, bu movie_li keywordu #movile_li diye hangi html-tag in in atributunden tanimlanirsa o tagin referansini temsil eder..AYNI THIS GIBI DUSUNELIM...HARIKA BESTPRACTISE!!
     onSelectMovie(liItem: HTMLElement): void 
@@ -67,6 +76,22 @@ export class MoviesComponent {
         divs.forEach((div, i) => {
             console.log(`Div #${i}:`, div.textContent);
         });
+    }
+
+     getMovieList() {
+        console.log("getMovieList...");
+
+        return this.movieService.getMovies();
+    }
+
+       getTitle() {
+        return this.title;
+    }
+    //Dikkat edelim biz parametredeki movie bilgisni html icerisinde movie listesini listeledgimiz li icerisinde gonderdigmz icin burda goruyoruz ve hangi li ye tiklandigini gorebiliyoruz
+    //vE TIKLANAN DATA YI .ts kisminda tanimladigmz bir selectedMovie degiskenine atayarak, kullanicinin tiklamis oldugu movie bilgisini ts icinde bir degiskene aktarmis oluyoruz...istedgimz gibi kullanabillelim diye!!!
+    onSelect(movie: Movie): void {
+        console.log(movie);
+        this.selectedMovie = movie;
     }
 }
 //Bu componenti olusturduk, peki bu componentten modulun haberi olmasi gerekiyor...app.module.ts dosyasina gidip bu componenti declaration kisminda eklememiz gerekiyor ki componentimizin taninmasi icin....

@@ -27,7 +27,7 @@ export class DashboardComponent {
     //this.movieService.getMovies().subscribe(movies=>this.movies = movies.slice(0,4)); //Eger kodu 1 satirdna fazla yazarsak suslu parantez icine yazmamiz gerekir
     this.movieService.getMovies().subscribe(movies=>
     {
-      this.movies = movies.slice(0,6);
+      this.movies = movies.slice(0,12);
       this.movieLength = movies.length;
     }
     );
