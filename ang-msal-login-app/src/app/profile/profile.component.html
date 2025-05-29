@@ -1,0 +1,5 @@
+<div *ngIf="profile">
+  <p><strong>Name:</strong> {{ profile.displayName }}</p>
+  <p><strong>Email:</strong> {{ profile.mail || profile.userPrincipalName }}</p>
+</div>
+
