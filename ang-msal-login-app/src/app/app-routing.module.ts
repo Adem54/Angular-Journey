@@ -44,5 +44,5 @@ $ ng generate guard masl
 ✔ Which type of guard would you like to create? CanActivate
 CREATE src/app/masl.guard.spec.ts (478 bytes)
 CREATE src/app/masl.guard.ts (133 bytes)
-msal.guards.ts dosyamiz olusuyor...
+msal.guards.ts dosyamiz olusuyor...bu dosya da konfigurasyon yaptiktan sonra..protected routumuzu kullanabilirz
 */
