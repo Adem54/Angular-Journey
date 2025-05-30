@@ -15,9 +15,11 @@ import {
   InteractionType
 } from '@azure/msal-browser';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { PublicPageComponent } from './public-page/public-page.component';
+import { ProtectedPageComponent } from './protected-page/protected-page.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, PublicPageComponent, ProtectedPageComponent],
   imports:  [
     BrowserModule,
     AppRoutingModule,
