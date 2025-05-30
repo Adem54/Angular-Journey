@@ -6,14 +6,30 @@ import { AppComponent } from './app.component';
 import { MsalGuard, MsalInterceptor, MsalModule, MsalRedirectComponent } from '@azure/msal-angular';
 import { InteractionType, PublicClientApplication } from '@azure/msal-browser';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatListModule } from '@angular/material/list';
+import { MatDividerModule } from '@angular/material/divider';
+import { ProfileComponent } from './profile/profile.component';
+import { HomeComponent } from './home/home.component';
+
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ProfileComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatCardModule,
+    MatListModule,
+    MatDividerModule,
     MsalModule.forRoot(new PublicClientApplication(
       {
         auth:{
@@ -65,6 +81,9 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
   bootstrap: [AppComponent, MsalRedirectComponent]
 })
 export class AppModule { }
+
+
+
 
 /*
 
@@ -161,4 +180,64 @@ Make sure:
 The redirectUri is registered in Azure Portal (under app registration → authentication)
 The browser isn't blocking third-party cookies (important for MSAL)
 You listen for the MSAL redirect callback if needed in your app (but MSAL Angular usually handles this automatically)
+
+
+🔐 HTTP_INTERCEPTORS + MsalInterceptor
+🔧 Purpose:
+MSAL will automatically intercept outgoing HTTP requests, and:
+Attach the access token
+So your app can securely call protected APIs (like Microsoft Graph or your own .NET backend)
+👇 How it works:
+providers: [
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: MsalInterceptor,
+    multi: true
+  },
+]
+  provide: HTTP_INTERCEPTORS: Tells Angular you're configuring a global HTTP interceptor
+useClass: MsalInterceptor: This interceptor will:
+Check the URL you're calling
+If it matches a protected resource (defined in your MSAL config)
+It will add an Authorization: Bearer <access_token> header
+multi: true: Required so Angular doesn't overwrite other interceptors
+
+2. 🔒 MsalGuard
+🔧 Purpose:
+MSAL route guard to protect Angular routes (like /dashboard, /profile, etc.)
+👇 How it works:
+providers: [ MsalGuard ]
+You use this guard in app-routing.module.ts:
+{
+  path: 'profile',
+  component: ProfileComponent,
+  canActivate: [MsalGuard]
+}
+When someone tries to access /profile:
+MSAL checks: “Is the user logged in?”
+✅ Yes → Allow access
+❌ No → Automatically redirects to Microsoft login
+
+
+3. 🔄 MsalRedirectComponent
+🔧 Purpose:
+This component handles the redirect response after Azure AD login using loginRedirect().
+👇 How it works:
+bootstrap: [AppComponent, MsalRedirectComponent]
+MSAL handles login in two ways:
+1-loginPopup() → Uses popup window
+
+2-loginRedirect() → Full page redirect
+
+If you're using loginRedirect(), MSAL needs a place to process the auth response
+That’s what MsalRedirectComponent does
+
+Without it, redirect logins won't complete properly.    
+
+Bunlari yaptiktan sonra index.html e gidip
+<body>
+  <app-root></app-root>
+  <app-redirect></app-redirect>
+  app-redirect i ekleriz, azure ready ile ilgli olan yeri
+
 */
