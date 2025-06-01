@@ -13,6 +13,8 @@ import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
 import { ProfileComponent } from './profile/profile.component';
 import { HomeComponent } from './home/home.component';
+import { AzureAdDemoService } from './azure-ad-demo.service';
+import { CommonModule } from '@angular/common';
 
 
 
@@ -30,6 +32,7 @@ import { HomeComponent } from './home/home.component';
     MatCardModule,
     MatListModule,
     MatDividerModule,
+    CommonModule,
     MsalModule.forRoot(new PublicClientApplication(
       {
         auth:{
@@ -76,7 +79,7 @@ import { HomeComponent } from './home/home.component';
       provide:HTTP_INTERCEPTORS,
       useClass:MsalInterceptor,
       multi:true
-    }, MsalGuard
+    }, MsalGuard, AzureAdDemoService// 
   ],
   bootstrap: [AppComponent, MsalRedirectComponent]
 })
