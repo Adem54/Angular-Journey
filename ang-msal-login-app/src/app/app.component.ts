@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MsalService } from '@azure/msal-angular';
 import { AuthenticationResult, InteractionStatus } from '@azure/msal-browser';
 import { MsalBroadcastService } from '@azure/msal-angular';
-import { filter } from 'rxjs';
+import { filter, Subject } from 'rxjs';
 
 
 @Component({
@@ -36,7 +36,8 @@ this.msalBroadcastService.inProgress$
 */
 
 export class AppComponent implements OnInit {
-
+  isUserLoggedIn:boolean= false;
+  private readonly _destroy = new Subject<void>();
   
   title = 'Microsoft Login';
   msalReady = false;
