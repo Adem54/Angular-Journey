@@ -1,19 +1,21 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { ProductComponent } from './product/product.component';
 
 @NgModule({
-  declarations: [
-    AppComponent
+  //componentler buraya eklenmelidir mutlaka
+  declarations: 
+  [
+      ProductComponent
   ],
+  //modeller de buraya eklenmeldir mutlaka
   imports: [
     BrowserModule,
     AppRoutingModule
   ],
   providers: [],
   //ilk olarak AppComponent i calistir diyoruz
-  bootstrap: [AppComponent]
+  bootstrap: [ProductComponent]
 })
 export class AppModule { }
