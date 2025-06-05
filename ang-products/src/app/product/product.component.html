@@ -1,6 +1,65 @@
 <p>product works!</p>
 
-
 <div class="bg-primary text-white m-2 p-2">
     There are {{model.getProducts().length}} products in the repostory
 </div>
+
+<div>
+    <h2>{{product.name}}</h2>
+    <!-- <h2 [textContent]="product.description">  </h2>
+    <h2 textContent="{{product.price}}">  </h2>
+    <img src="assets/img/{{product.imageUrl}}" />
+    <img [src]="'assets/img/'+product.imageUrl" /> -->
+</div>
+
+
+ <div class="container">
+  <h2>Contextual Backgrounds</h2>
+  <p>Use the contextual background classes to provide "meaning through colors":</p>
+  <p [ngClass]="{'bg-primary': isActive}">This text is important.</p>
+  <!-- <p class="bg-success">This text indicates success.</p>
+  <p class="bg-info">This text represents some information.</p>
+  <p class="bg-warning">This text represents a warning.</p> -->
+  <p class="bg-danger">This text represents danger.</p>
+  <p [ngClass]="isActive ? 'bg-primary' : 'bg-danger'">This text is important.</p>
+  <p [ngClass]="{'bg-info': isInfo, 'bg-warning': !isInfo}">This text is important.</p>
+
+  <hr>
+
+  <p class="bg-danger" [ngClass]="getClasses(3)">This is the 4.product. Productname: {{model.getProductsById(4).name}}</p>
+  <p class="bg-danger" class="{{getClasses(1)}}">This is the 1.product. Productname: {{model.getProductsById(1).name}}</p>
+  <p  [class]="getClasses(3)" class="text-white">This is the 3.product. Productname: {{model.getProductsById(3).name}}</p>
+
+<hr>
+<h2>Test!</h2>
+<!-- Safe: merges bg-danger and dynamic classes -->
+<p class="bg-danger" [class]="getClasses(4)">
+  This is the 4.product. Productname: {{model.getProductsById(4).name}}
+</p>
+
+<!-- Safe: same -->
+<p class="bg-success-subtle" [ngClass]="getClasses(1)">
+  This is the 1.product. Productname: {{model.getProductsById(1).name}}
+</p>
+
+
+
+<button class="btn btn-primary" [disabled]="disabled">Submit</button>
+<button class="btn btn-primary" [class.disabled]="disabled">Submit</button>
+<br><br>
+<button class="btn btn-primary" disabled="{{disabled}}">Submit</button>
+
+
+<br>
+<!-- Burda normalde tutorin soyledigine gore direk manuel olarak atanan class lar,[class]="getClasses(4)"> veya [ngClass]="getClasses(1)"> class lari dinamik oalrak .ts den alarak kullanirsak maneul olarak kullandigmz class lar override edilecektir...diye soylyor ama ben test ettigmde her zaman bu sekidle olmadi ondan dolayi simdilik bu sekilde kalsin.Ama biz konflktleri onlemek adina, class lari organize ederken eger [ngClass] veya [class] kullaniyorsak ve dinamik bir sekilde .ts den aliyorsak bu degerleri o zaman tum classlari orda kullanalim ki konflikt yasanmasin  -->
+  
+</div>
+
+<div [class]="getClasses(2)"></div>
+
+<br>
+
+<div class="m-2 p-2" [ngClass]="getClassMap(1)">Katalog daki ilk product {{model.getProductsById(1).name}}  </div>
+<div class="m-2 p-2" [ngClass]="getClassMap(2)">Katalog daki ilk product {{model.getProductsById(2).name}}  </div>
+
+<br>
